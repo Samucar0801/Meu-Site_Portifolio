@@ -1,0 +1,1941 @@
+@import url("https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;600&family=Fira+Code:wght@400;700&family=Orbitron:wght@500;700&display=swap");
+:root {
+  --bg-color: #0a0a10;
+  --accent-color: #00aaff;
+  --text-color: #cdd6f4;
+  --subtle-text-color: #a6adc8;
+  --border-color: rgba(255, 255, 255, 0.1);
+  --font-main: "Lexend", sans-serif;
+  --font-mono: "Fira Code", monospace;
+  --font-display: "Orbitron", sans-serif;
+}
+* {
+  box-sizing: border-box;
+  cursor: none !important;
+}
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+body {
+  background: var(--bg-color);
+  font-family: var(--font-main);
+}
+#root {
+  position: relative;
+}
+/* ... (todo o CSS anterior do site continua aqui) ... */
+.ui-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: var(--text-color);
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+.ui-container.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+.ui-container h1,
+.ui-container p,
+.ui-container a {
+  pointer-events: auto;
+}
+h1 {
+  font-family: var(--font-mono);
+  font-size: clamp(2rem, 8vw, 4rem);
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+.glitch {
+  position: relative;
+}
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  overflow: hidden;
+}
+.glitch::before {
+  left: 2px;
+  text-shadow: -2px 0 var(--accent-color);
+  animation: glitch-anim-1 2.5s infinite linear alternate-reverse;
+}
+.glitch::after {
+  left: -2px;
+  text-shadow: -2px 0 #ff00c1, 2px 2px var(--accent-color);
+  animation: glitch-anim-2 2.5s infinite linear alternate-reverse;
+}
+@keyframes glitch-anim-1 {
+  0%,
+  100% {
+    clip-path: inset(45% 0 50% 0);
+  }
+  20% {
+    clip-path: inset(10% 0 85% 0);
+  }
+  40% {
+    clip-path: inset(60% 0 30% 0);
+  }
+  60% {
+    clip-path: inset(30% 0 65% 0);
+  }
+  80% {
+    clip-path: inset(90% 0 5% 0);
+  }
+}
+@keyframes glitch-anim-2 {
+  0%,
+  100% {
+    clip-path: inset(5% 0 90% 0);
+  }
+  20% {
+    clip-path: inset(80% 0 5% 0);
+  }
+  40% {
+    clip-path: inset(20% 0 70% 0);
+  }
+  60% {
+    clip-path: inset(70% 0 20% 0);
+  }
+  80% {
+    clip-path: inset(15% 0 80% 0);
+  }
+}
+#typewriter {
+  font-family: var(--font-mono);
+  font-size: clamp(1rem, 3vw, 1.25rem);
+  color: var(--subtle-text-color);
+  margin-bottom: 2rem;
+  min-height: 1.5rem;
+}
+.cta-button {
+  font-family: var(--font-mono);
+  text-decoration: none;
+  color: var(--accent-color);
+  border: 1px solid var(--accent-color);
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  transition: all 0.3s;
+}
+.cta-button:hover {
+  background-color: var(--accent-color);
+  color: #0a0a10;
+  box-shadow: 0 0 20px var(--accent-color);
+}
+.content-wrapper {
+  pointer-events: none !important;
+}
+.content-card {
+  pointer-events: auto !important;
+  background: rgba(13, 26, 38, 0.9);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
+  padding: 2rem;
+  border-radius: 12px;
+  width: 500px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+.content-card h2 {
+  font-family: var(--font-mono);
+  color: var(--accent-color);
+  border-bottom: 1px solid var(--accent-color);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+.project-card-grid {
+  width: 800px;
+  height: 85vh;
+  display: flex;
+  flex-direction: column;
+}
+.card-header {
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+.card-header p {
+  font-size: 0.9rem;
+  color: var(--subtle-text-color);
+  text-align: center;
+  margin-top: 0.5rem;
+}
+.project-grid-scrollable {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding-top: 1rem;
+}
+.project-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+.project-item {
+  background: rgba(0, 170, 255, 0.05);
+  padding: 1rem;
+  border-radius: 8px;
+  border-left: 2px solid var(--accent-color);
+  display: flex;
+  flex-direction: column;
+}
+.project-item.clickable:hover {
+  transform: scale(1.03);
+  background: rgba(0, 170, 255, 0.1);
+  border-left-color: #00ff88;
+}
+.project-item h3 {
+  color: #fff;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+.project-item p {
+  font-size: 0.9rem;
+  color: var(--subtle-text-color);
+  margin-bottom: 1rem;
+  flex-grow: 1;
+}
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+}
+.tag {
+  margin: 2px;
+  background-color: rgba(0, 170, 255, 0.1);
+  color: var(--accent-color);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+}
+.navigation-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1.5rem;
+  margin-top: auto;
+  border-top: 1px solid var(--border-color);
+}
+.back-button,
+.cta-button-inline {
+  font-family: var(--font-mono);
+  background: none;
+  border: 1px solid var(--accent-color);
+  color: var(--accent-color);
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 0.9rem;
+}
+.cta-button-inline {
+  background: var(--accent-color);
+  color: #0a0a10;
+  font-weight: bold;
+}
+.back-button:hover,
+.cta-button-inline:hover {
+  background: #00c3ff;
+  color: #0a0a10;
+  border-color: #00c3ff;
+  box-shadow: 0 0 15px #00c3ff;
+}
+.skills-title {
+  text-align: center;
+  color: var(--accent-color);
+  font-family: var(--font-display);
+  text-shadow: 0 0 15px rgba(0, 170, 255, 0.7);
+  pointer-events: none;
+}
+.skills-title h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem 0;
+  letter-spacing: 2px;
+}
+.skills-title p {
+  font-size: 0.8rem;
+  margin: 0;
+  opacity: 0.7;
+  font-style: italic;
+}
+.category-label {
+  color: white;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  text-shadow: 0 0 8px black;
+  pointer-events: none;
+  text-align: center;
+  white-space: nowrap;
+}
+.skill-moon-label {
+  color: #fff;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-family: var(--font-main);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* ===== CURSOR CÓSMICO (VERSÃO FINAL) ===== */
+.cosmic-cursor {
+  position: fixed;
+  width: 20px;
+  height: 20px;
+  background: radial-gradient(circle, #00ffff 0%, #0080ff 50%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  box-shadow: 0 0 20px #00ffff, 0 0 40px #00ffff;
+  animation: pulse 2s infinite ease-in-out;
+  mix-blend-mode: screen;
+  transform: translate(-50%, -50%);
+}
+@keyframes pulse {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.2);
+    opacity: 0.8;
+  }
+}
+.cursor-ring {
+  position: fixed;
+  width: 40px;
+  height: 40px;
+  border: 2px solid rgba(0, 255, 255, 0.3);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: all 0.15s ease-out;
+}
+.cursor-ring::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  animation: rotate 4s linear infinite;
+}
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+#particleCanvas,
+#constellationCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+#particleCanvas {
+  z-index: 9997;
+}
+.cursor-hover .cosmic-cursor {
+  transform: translate(-50%, -50%) scale(1.5);
+  background: radial-gradient(circle, #ff00ff 0%, #ff0080 50%, transparent 70%);
+  box-shadow: 0 0 30px #ff00ff, 0 0 60px #ff00ff;
+}
+.cursor-hover .cursor-ring {
+  width: 60px;
+  height: 60px;
+  border-color: rgba(255, 0, 255, 0.5);
+}
+@media (prefers-reduced-motion: reduce) {
+  .cosmic-cursor,
+  .cursor-ring,
+  .cursor-ring::before {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+@media (max-width: 768px) {
+  .cosmic-cursor,
+  .cursor-ring,
+  #particleCanvas,
+  #constellationCanvas {
+    display: none;
+  }
+  * {
+    cursor: auto !important;
+  }
+}
+
+/* ESTILIZAÇÃO DA BARRA DE ROLAGEM CUSTOMIZADA */
+/* Para navegadores Webkit (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(30, 41, 59, 0.3); /* Fundo escuro semi-transparente */
+  border-radius: 10px;
+  border: 1px solid rgba(71, 85, 105, 0.2);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    45deg,
+    #0ea5e9,
+    #06b6d4
+  ); /* Gradiente azul que combina com o site */
+  border-radius: 10px;
+  border: 2px solid rgba(30, 41, 59, 0.1);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    45deg,
+    #0284c7,
+    #0891b2
+  ); /* Azul mais escuro no hover */
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    0 0 10px rgba(6, 182, 212, 0.3);
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: linear-gradient(
+    45deg,
+    #0369a1,
+    #0e7490
+  ); /* Ainda mais escuro quando clicado */
+}
+
+::-webkit-scrollbar-corner {
+  background: rgba(30, 41, 59, 0.3);
+}
+
+/* Para Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #0ea5e9 rgba(30, 41, 59, 0.3);
+}
+
+/* Estilização específica para a grade de projetos */
+.project-grid-scrollable {
+  /* Remove as regras que estavam escondendo a barra */
+  scrollbar-width: thin; /* Em vez de 'none' */
+  scrollbar-color: #0ea5e9 rgba(30, 41, 59, 0.3);
+}
+
+/* Remove a regra que estava escondendo a barra no Webkit */
+.project-grid-scrollable::-webkit-scrollbar {
+  width: 12px; /* Em vez de 'display: none' */
+  display: block;
+}
+
+/* Se você estiver usando SimpleBar, ajuste essas regras */
+.simplebar-scrollbar::before {
+  background: linear-gradient(45deg, #0ea5e9, #06b6d4) !important;
+  opacity: 1 !important;
+  border-radius: 10px !important;
+  border: 2px solid rgba(30, 41, 59, 0.1) !important;
+}
+
+.simplebar-scrollbar:hover::before {
+  background: linear-gradient(45deg, #0284c7, #0891b2) !important;
+  box-shadow: 0 0 10px rgba(6, 182, 212, 0.3) !important;
+}
+
+.simplebar-track.simplebar-vertical {
+  width: 12px !important;
+  background: rgba(30, 41, 59, 0.3) !important;
+  border-radius: 10px !important;
+}
+
+.simplebar-track.simplebar-vertical .simplebar-scrollbar::before {
+  top: 2px;
+  right: 2px;
+  bottom: 2px;
+  left: 2px;
+}
+
+/* Animação suave para a barra de rolagem */
+::-webkit-scrollbar-thumb {
+  transition: all 0.3s ease;
+}
+
+/* Efeito de brilho nas estrelas - combina com o tema do site */
+@keyframes starGlow {
+  0%,
+  100% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+::-webkit-scrollbar-thumb:hover {
+  animation: starGlow 2s infinite;
+}
+
+/* ===== CURSOR ESTRELA CÓSMICA (VERSÃO FINAL) ===== */
+
+/* Remove cursor padrão de absolutamente TUDO - incluindo barra de rolagem */
+*,
+*::before,
+*::after,
+html,
+body,
+div,
+span,
+canvas,
+svg,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video,
+button,
+input,
+select,
+textarea,
+::-webkit-scrollbar,
+::-webkit-scrollbar-thumb,
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-corner,
+.project-grid-scrollable,
+.project-grid-scrollable *,
+.simplebar-scrollbar,
+.simplebar-track {
+  cursor: none !important;
+}
+
+/* ESTRELA PRINCIPAL DO CURSOR */
+.cosmic-star-cursor {
+  position: fixed;
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+  z-index: 999999;
+  transform: translate(-50%, -50%);
+
+  /* Cria a forma da estrela usando clip-path */
+  background: radial-gradient(
+    circle,
+    #00ffff 0%,
+    #0080ff 30%,
+    #004080 70%,
+    transparent 100%
+  );
+  clip-path: polygon(
+    50% 0%,
+    61% 35%,
+    98% 35%,
+    68% 57%,
+    79% 91%,
+    50% 70%,
+    21% 91%,
+    32% 57%,
+    2% 35%,
+    39% 35%
+  );
+
+  /* Efeitos de brilho */
+  filter: drop-shadow(0 0 10px #00ffff) drop-shadow(0 0 20px #00ffff)
+    drop-shadow(0 0 30px #0080ff);
+
+  /* Animações */
+  animation: starPulse 2s infinite ease-in-out, starRotate 8s infinite linear;
+}
+
+@keyframes starPulse {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    filter: drop-shadow(0 0 10px #00ffff) drop-shadow(0 0 20px #00ffff)
+      drop-shadow(0 0 30px #0080ff);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.2);
+    filter: drop-shadow(0 0 15px #00ffff) drop-shadow(0 0 30px #00ffff)
+      drop-shadow(0 0 45px #0080ff);
+  }
+}
+
+@keyframes starRotate {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+/* ANEL ORBITAL AO REDOR DA ESTRELA */
+.cursor-ring {
+  position: fixed;
+  width: 50px;
+  height: 50px;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 999998;
+  transform: translate(-50%, -50%);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Gradiente orbital */
+  background: conic-gradient(
+    from 0deg,
+    transparent,
+    rgba(0, 255, 255, 0.4),
+    transparent,
+    rgba(0, 128, 255, 0.3),
+    transparent
+  );
+  mask: radial-gradient(circle, transparent 70%, black 72%, black 100%);
+  -webkit-mask: radial-gradient(circle, transparent 70%, black 72%, black 100%);
+
+  animation: orbitRotate 3s linear infinite;
+}
+
+@keyframes orbitRotate {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(-360deg);
+  }
+}
+
+/* Anel interno adicional */
+.cursor-ring::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 35px;
+  height: 35px;
+  transform: translate(-50%, -50%);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  animation: innerRotate 2s linear infinite reverse;
+}
+
+@keyframes innerRotate {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+/* ESTADO HOVER - SUPERNOVA */
+.cursor-hover .cosmic-star-cursor {
+  width: 24px;
+  height: 24px;
+  background: radial-gradient(
+    circle,
+    #ff00ff 0%,
+    #ff0080 30%,
+    #8000ff 70%,
+    transparent 100%
+  );
+  filter: drop-shadow(0 0 15px #ff00ff) drop-shadow(0 0 30px #ff00ff)
+    drop-shadow(0 0 45px #8000ff);
+  animation: supernovaPulse 1s infinite ease-in-out,
+    starRotate 4s infinite linear;
+}
+
+@keyframes supernovaPulse {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.5);
+  }
+}
+
+.cursor-hover .cursor-ring {
+  width: 80px;
+  height: 80px;
+  background: conic-gradient(
+    from 0deg,
+    transparent,
+    rgba(255, 0, 255, 0.6),
+    transparent,
+    rgba(255, 0, 128, 0.4),
+    transparent
+  );
+  animation: orbitRotate 1.5s linear infinite;
+}
+
+.cursor-hover .cursor-ring::before {
+  width: 60px;
+  height: 60px;
+  border-color: rgba(255, 0, 255, 0.4);
+  animation: innerRotate 1s linear infinite reverse;
+}
+
+/* CANVAS DE PARTÍCULAS E CONSTELAÇÕES */
+#particleCanvas,
+#constellationCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+#particleCanvas {
+  z-index: 999997;
+}
+
+#constellationCanvas {
+  z-index: 999996;
+}
+
+/* VERSÃO REDUZIDA PARA ACESSIBILIDADE */
+@media (prefers-reduced-motion: reduce) {
+  .cosmic-star-cursor,
+  .cursor-ring,
+  .cursor-ring::before {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .cosmic-star-cursor {
+    filter: drop-shadow(0 0 10px #00ffff);
+  }
+}
+
+/* VERSÃO MOBILE - REMOVE O CURSOR CUSTOMIZADO */
+@media (max-width: 768px) {
+  .cosmic-star-cursor,
+  .cursor-ring,
+  #particleCanvas,
+  #constellationCanvas {
+    display: none;
+  }
+
+  * {
+    cursor: auto !important;
+  }
+}
+
+/* EFEITOS ESPECIAIS PARA ELEMENTOS INTERATIVOS */
+.cursor-hover .cosmic-star-cursor::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 60px;
+  height: 60px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(
+    circle,
+    transparent 60%,
+    rgba(255, 0, 255, 0.1) 70%,
+    transparent 80%
+  );
+  border-radius: 50%;
+  animation: shockwave 0.6s ease-out infinite;
+}
+
+@keyframes shockwave {
+  0% {
+    width: 20px;
+    height: 20px;
+    opacity: 1;
+  }
+  100% {
+    width: 100px;
+    height: 100px;
+    opacity: 0;
+  }
+}
+
+/* Animações para os botões */
+.explore-universe-btn {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.explore-universe-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.5s;
+}
+
+.explore-universe-btn:hover::before {
+  left: 100%;
+}
+
+.explore-universe-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(0, 170, 255, 0.5);
+}
+
+.back-to-universe-btn:hover {
+  transform: translateX(-5px);
+  box-shadow: -5px 0 15px rgba(0, 170, 255, 0.3);
+}
+
+.view-projects-btn:hover {
+  transform: translateX(5px);
+  box-shadow: 5px 0 15px rgba(0, 255, 255, 0.3);
+}
+
+.back-to-codex-btn:hover {
+  transform: translateX(-5px);
+  box-shadow: -5px 0 15px rgba(180, 120, 255, 0.3);
+}
+
+.view-skills-btn:hover {
+  transform: translateX(5px);
+  box-shadow: 5px 0 15px rgba(255, 100, 200, 0.3);
+}
+
+.back-to-projects-btn:hover {
+  transform: translateX(-5px);
+  box-shadow: -5px 0 15px rgba(100, 255, 150, 0.3);
+}
+
+/* Animações de transição para o body */
+.transitioning-to-sobre {
+  background: radial-gradient(
+    circle at center,
+    rgba(0, 170, 255, 0.1),
+    transparent
+  );
+  animation: exploreUniverseTransition 1.5s ease-out;
+}
+
+.transitioning-to-hero {
+  animation: returnToUniverseTransition 1.5s ease-out;
+}
+
+.transitioning-to-projetos {
+  background: radial-gradient(
+    circle at center,
+    rgba(0, 255, 255, 0.08),
+    transparent
+  );
+  animation: projectsTransition 1.5s ease-out;
+}
+
+.transitioning-to-habilidades {
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 100, 200, 0.08),
+    transparent
+  );
+  animation: skillsTransition 1.5s ease-out;
+}
+
+/* Keyframes das animações */
+@keyframes exploreUniverseTransition {
+  0% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  25% {
+    transform: scale(1.02);
+    filter: brightness(1.2) hue-rotate(10deg);
+  }
+  50% {
+    transform: scale(0.98);
+    filter: brightness(1.1) hue-rotate(20deg);
+  }
+  75% {
+    transform: scale(1.01);
+    filter: brightness(1.3) hue-rotate(15deg);
+  }
+  100% {
+    transform: scale(1);
+    filter: brightness(1) hue-rotate(0deg);
+  }
+}
+
+@keyframes returnToUniverseTransition {
+  0% {
+    filter: brightness(1.2) blur(1px);
+  }
+  50% {
+    filter: brightness(0.8) blur(0.5px);
+  }
+  100% {
+    filter: brightness(1) blur(0px);
+  }
+}
+
+@keyframes projectsTransition {
+  0% {
+    transform: scale(1) rotate(0deg);
+    filter: hue-rotate(0deg);
+  }
+  25% {
+    transform: scale(1.01) rotate(0.5deg);
+    filter: hue-rotate(30deg);
+  }
+  50% {
+    transform: scale(0.99) rotate(-0.5deg);
+    filter: hue-rotate(60deg);
+  }
+  75% {
+    transform: scale(1.005) rotate(0.2deg);
+    filter: hue-rotate(30deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    filter: hue-rotate(0deg);
+  }
+}
+
+@keyframes skillsTransition {
+  0% {
+    transform: scale(1);
+    filter: brightness(1) saturate(1);
+  }
+  20% {
+    transform: scale(1.03);
+    filter: brightness(1.4) saturate(1.3) hue-rotate(45deg);
+  }
+  40% {
+    transform: scale(0.97);
+    filter: brightness(1.2) saturate(1.5) hue-rotate(90deg);
+  }
+  60% {
+    transform: scale(1.02);
+    filter: brightness(1.6) saturate(1.2) hue-rotate(135deg);
+  }
+  80% {
+    transform: scale(0.99);
+    filter: brightness(1.3) saturate(1.1) hue-rotate(180deg);
+  }
+  100% {
+    transform: scale(1);
+    filter: brightness(1) saturate(1) hue-rotate(0deg);
+  }
+}
+
+/* Animações para as esferas de habilidades */
+.category-label {
+  transition: all 0.3s ease;
+  text-shadow: 0 0 10px currentColor;
+}
+
+.skill-moon-label {
+  background: rgba(0, 0, 0, 0.8);
+  color: #00aaff;
+  padding: 5px 10px;
+  border-radius: 15px;
+  font-size: 12px;
+  font-weight: bold;
+  border: 1px solid #00aaff;
+  box-shadow: 0 0 10px rgba(0, 170, 255, 0.5);
+  animation: skillLabelPulse 2s ease-in-out infinite;
+}
+
+@keyframes skillLabelPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 10px rgba(0, 170, 255, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(0, 170, 255, 0.8);
+  }
+}
+
+/* Efeitos de hover melhorados */
+.content-card {
+  transition: all 0.3s ease;
+}
+
+.content-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(0, 170, 255, 0.2);
+}
+
+.project-item {
+  transition: all 0.3s ease;
+  border-radius: 10px;
+  padding: 15px;
+}
+
+.project-item:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 25px rgba(0, 255, 255, 0.15);
+  border: 1px solid rgba(0, 255, 255, 0.3);
+}
+
+/* Animação para o título principal */
+.glitch {
+  transition: all 0.3s ease;
+}
+
+.glitch:hover {
+  animation: glitchHover 0.3s ease-in-out;
+}
+
+@keyframes glitchHover {
+  0%,
+  100% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-2px, 2px);
+  }
+  40% {
+    transform: translate(-2px, -2px);
+  }
+  60% {
+    transform: translate(2px, 2px);
+  }
+  80% {
+    transform: translate(2px, -2px);
+  }
+}
+
+/* Efeito de partículas nos botões */
+.cta-button,
+.back-button,
+.cta-button-inline {
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-button::after,
+.back-button::after,
+.cta-button-inline::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.3), transparent);
+  transition: all 0.4s ease;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+}
+
+.cta-button:hover::after,
+.back-button:hover::after,
+.cta-button-inline:hover::after {
+  width: 200px;
+  height: 200px;
+}
+
+/* Animação de entrada para elementos */
+.skills-title h2 {
+  animation: titleGlow 3s ease-in-out infinite;
+}
+
+@keyframes titleGlow {
+  0%,
+  100% {
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+  }
+  50% {
+    text-shadow: 0 0 30px rgba(0, 170, 255, 0.8),
+      0 0 40px rgba(0, 170, 255, 0.6);
+  }
+}
+
+/* Projetos clicáveis */
+.clickable-project {
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(0, 170, 255, 0.2);
+}
+
+.clickable-project:hover {
+  transform: translateY(-5px);
+  border-color: rgba(0, 170, 255, 0.6);
+  box-shadow: 0 10px 30px rgba(0, 170, 255, 0.3);
+}
+
+.project-cta {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.cta-text {
+  color: #00aaff;
+  font-weight: 600;
+  font-size: 0.9em;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  text-shadow: 0 0 5px #00aaff;
+}
+
+.clickable-project:hover .cta-text {
+  opacity: 1;
+}
+
+/* Container do Estudo de Caso */
+.case-study-container {
+  width: 90vw;
+  max-width: 1000px;
+  height: 85vh;
+  background: rgba(10, 10, 20, 0.95);
+  border: 1px solid rgba(0, 170, 255, 0.3);
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  pointer-events: auto !important;
+}
+
+/* Header do Estudo de Caso */
+.case-study-header {
+  padding: 30px;
+  border-bottom: 1px solid rgba(0, 170, 255, 0.2);
+  background: linear-gradient(
+    135deg,
+    rgba(0, 170, 255, 0.1),
+    rgba(255, 0, 150, 0.1)
+  );
+}
+
+.close-case-study {
+  background: transparent;
+  border: 1px solid rgba(0, 170, 255, 0.5);
+  color: #00aaff;
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+  font-family: "Orbitron", monospace;
+}
+
+.close-case-study:hover {
+  background: rgba(0, 170, 255, 0.1);
+  transform: translateX(-5px);
+}
+
+.project-meta h1 {
+  color: #ffffff;
+  font-size: 2.2em;
+  margin: 0 0 10px 0;
+  font-family: "Orbitron", monospace;
+}
+
+.project-meta h2 {
+  color: #00aaff;
+  font-size: 1.3em;
+  margin: 0 0 20px 0;
+  font-weight: 300;
+}
+
+.project-details {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.project-details span {
+  color: #cccccc;
+  font-size: 0.9em;
+}
+
+/* Conteúdo do Estudo de Caso */
+.case-study-content {
+  flex: 1;
+  padding: 30px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 170, 255, 0.5) transparent;
+  pointer-events: auto !important;
+}
+
+.case-study-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.case-study-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.case-study-content::-webkit-scrollbar-thumb {
+  background: rgba(0, 170, 255, 0.5);
+  border-radius: 3px;
+}
+
+/* Seções do Estudo de Caso */
+.case-study-content section {
+  margin-bottom: 35px;
+}
+
+.case-study-content h3 {
+  color: #00aaff;
+  font-size: 1.4em;
+  margin-bottom: 15px;
+  font-family: "Orbitron", monospace;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.case-study-content p {
+  color: #dddddd;
+  line-height: 1.7;
+  font-size: 1.1em;
+}
+
+.case-study-content ol,
+.case-study-content ul {
+  color: #dddddd;
+  line-height: 1.7;
+  font-size: 1.05em;
+  padding-left: 25px;
+}
+
+.case-study-content li {
+  margin-bottom: 8px;
+}
+
+/* Tags Tecnológicas */
+.tech-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.tech-tag {
+  background: rgba(0, 170, 255, 0.2);
+  color: #00aaff;
+  padding: 8px 15px;
+  border-radius: 20px;
+  font-size: 0.9em;
+  border: 1px solid rgba(0, 170, 255, 0.3);
+  transition: all 0.3s ease;
+}
+
+.tech-tag:hover {
+  background: rgba(0, 170, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Animações de Transição */
+.transitioning-to-case-study {
+  overflow: hidden;
+}
+
+.transitioning-to-case-study::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    circle,
+    rgba(0, 170, 255, 0.2),
+    rgba(10, 10, 20, 0.9)
+  );
+  z-index: 9999;
+  animation: caseStudyTransition 1.5s ease-in-out;
+}
+
+@keyframes caseStudyTransition {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1);
+  }
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .case-study-container {
+    width: 95vw;
+    height: 90vh;
+  }
+
+  .case-study-header {
+    padding: 20px;
+  }
+
+  .project-meta h1 {
+    font-size: 1.8em;
+  }
+
+  .project-details {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .case-study-content {
+    padding: 20px;
+  }
+}
+
+.case-study-image-container {
+  width: 100%;
+  margin-bottom: 30px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(0, 170, 255, 0.2);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+}
+
+.case-study-image-container img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ===== HOLOGRAM PROJECTOR STYLES ===== */
+/* ADICIONE ESSE CSS NO SEU index.css */
+
+.hologram-projector-container {
+  position: relative;
+  width: 300px;
+  height: 350px;
+  margin: 30px auto;
+  perspective: 1000px;
+}
+
+/* BASE DO PROJETOR */
+.projector-base {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 30px;
+  background: linear-gradient(45deg, #1a1a2e, #16213e);
+  border-radius: 50%;
+  border: 2px solid rgba(0, 170, 255, 0.5);
+  box-shadow: 0 0 20px rgba(0, 170, 255, 0.3),
+    inset 0 0 20px rgba(0, 170, 255, 0.1);
+  animation: projectorPulse 3s infinite ease-in-out;
+}
+
+.projector-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60px;
+  height: 60px;
+  border: 3px solid transparent;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    rgba(0, 170, 255, 0.8),
+    rgba(0, 255, 170, 0.6),
+    rgba(170, 0, 255, 0.8),
+    rgba(0, 170, 255, 0.8)
+  );
+  mask: radial-gradient(circle, transparent 70%, white 72%);
+  animation: projectorRingRotate 4s linear infinite;
+}
+
+.projector-core {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  background: radial-gradient(circle, #00aaff, #0066cc);
+  border-radius: 50%;
+  box-shadow: 0 0 30px #00aaff, inset 0 0 10px rgba(255, 255, 255, 0.3);
+  animation: coreFlicker 2s infinite alternate;
+}
+
+/* PARTÍCULAS ORBITAIS */
+.orbital-particles {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 240px;
+  height: 240px;
+  pointer-events: none;
+}
+
+.particle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  background: radial-gradient(circle, #00ffff, transparent);
+  border-radius: 50%;
+  transform-origin: 0 0;
+  animation: particleFloat 3s infinite ease-in-out;
+  box-shadow: 0 0 10px #00ffff;
+}
+
+.particle:nth-child(even) {
+  background: radial-gradient(circle, #ff00ff, transparent);
+  box-shadow: 0 0 10px #ff00ff;
+  animation-duration: 4s;
+  animation-direction: reverse;
+}
+
+/* HOLOGRAMA DA IMAGEM */
+.hologram-image {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 150px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+.hologram-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border: 2px solid rgba(0, 170, 255, 0.6);
+  border-radius: 10px;
+  overflow: hidden;
+  background: rgba(0, 170, 255, 0.05);
+  box-shadow: 0 0 30px rgba(0, 170, 255, 0.4),
+    inset 0 0 20px rgba(0, 170, 255, 0.1);
+  backdrop-filter: blur(2px);
+}
+
+.hologram-content img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.9;
+  filter: brightness(1.2) contrast(1.3) hue-rotate(10deg)
+    drop-shadow(0 0 10px rgba(0, 170, 255, 0.5));
+  transition: all 0.3s ease;
+}
+
+/* EFEITOS DE SCAN */
+.scan-lines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0px,
+    transparent 2px,
+    rgba(0, 170, 255, 0.1) 2px,
+    rgba(0, 170, 255, 0.1) 4px
+  );
+  animation: scanMove 2s linear infinite;
+  pointer-events: none;
+}
+
+.hologram-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    45deg,
+    transparent 30%,
+    rgba(0, 170, 255, 0.1) 50%,
+    transparent 70%
+  );
+  animation: hologramShimmer 3s infinite ease-in-out;
+  pointer-events: none;
+}
+
+/* TEXTO DE INTERAÇÃO */
+.interaction-hint {
+  position: absolute;
+  bottom: -35px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #00aaff;
+  font-family: "Orbitron", monospace;
+  font-size: 10px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-align: center;
+  opacity: 0.7;
+  animation: hintPulse 2s infinite ease-in-out;
+  pointer-events: none;
+}
+
+/* FEIXES DE LUZ */
+.light-beams {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 200px;
+  pointer-events: none;
+}
+
+.beam {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 2px;
+  height: 180px;
+  transform-origin: bottom center;
+  background: linear-gradient(to top, rgba(0, 170, 255, 0.8), transparent);
+  animation: beamSway 4s infinite ease-in-out;
+}
+
+.beam-1 {
+  transform: translateX(-50%) rotate(-15deg);
+  animation-delay: 0s;
+}
+
+.beam-2 {
+  transform: translateX(-50%) rotate(0deg);
+  animation-delay: 1s;
+  background: linear-gradient(to top, rgba(0, 255, 170, 0.6), transparent);
+}
+
+.beam-3 {
+  transform: translateX(-50%) rotate(15deg);
+  animation-delay: 2s;
+  background: linear-gradient(to top, rgba(170, 0, 255, 0.6), transparent);
+}
+
+/* EFEITO DE FRAGMENTAÇÃO */
+.image-fragments {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.fragment {
+  position: absolute;
+  width: 25%;
+  height: 25%;
+  background: inherit;
+  border: 1px solid rgba(0, 170, 255, 0.8);
+  animation: fragmentExplode 1.5s ease-in-out;
+  box-shadow: 0 0 15px rgba(0, 170, 255, 0.6);
+}
+
+/* ESTADOS DO HOLOGRAMA */
+.hologram-image:hover {
+  transform: translateX(-50%) scale(1.05) rotateY(5deg);
+}
+
+.hologram-image:hover .hologram-content {
+  border-color: rgba(0, 255, 170, 0.8);
+  box-shadow: 0 0 40px rgba(0, 255, 170, 0.6),
+    inset 0 0 30px rgba(0, 255, 170, 0.1);
+}
+
+.hologram-image:hover .interaction-hint {
+  color: #00ff88;
+  opacity: 1;
+  animation: hintGlow 1s infinite ease-in-out;
+}
+
+.hologram-image.transforming {
+  animation: hologramTransform 2s ease-in-out;
+}
+
+.hologram-image.fragments-active .hologram-content {
+  animation: contentDissolve 1.5s ease-in-out;
+}
+
+/* ANIMAÇÕES */
+@keyframes projectorPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(0, 170, 255, 0.3),
+      inset 0 0 20px rgba(0, 170, 255, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(0, 170, 255, 0.6),
+      inset 0 0 30px rgba(0, 170, 255, 0.2);
+  }
+}
+
+@keyframes projectorRingRotate {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+@keyframes coreFlicker {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes particleFloat {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes scanMove {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes hologramShimmer {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes hintPulse {
+  0%,
+  100% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes hintGlow {
+  0%,
+  100% {
+    text-shadow: 0 0 10px currentColor;
+  }
+  50% {
+    text-shadow: 0 0 20px currentColor, 0 0 30px currentColor;
+  }
+}
+
+@keyframes beamSway {
+  0%,
+  100% {
+    transform: translateX(-50%) rotate(var(--rotation)) scaleY(1);
+  }
+  25% {
+    transform: translateX(-50%) rotate(calc(var(--rotation) + 3deg)) scaleY(1.1);
+  }
+  75% {
+    transform: translateX(-50%) rotate(calc(var(--rotation) - 3deg)) scaleY(0.9);
+  }
+}
+
+@keyframes hologramTransform {
+  0% {
+    transform: translateX(-50%) scale(1) rotateY(0deg);
+  }
+  25% {
+    transform: translateX(-50%) scale(1.2) rotateY(90deg);
+  }
+  50% {
+    transform: translateX(-50%) scale(0.8) rotateY(180deg);
+  }
+  75% {
+    transform: translateX(-50%) scale(1.1) rotateY(270deg);
+  }
+  100% {
+    transform: translateX(-50%) scale(1) rotateY(360deg);
+  }
+}
+
+@keyframes contentDissolve {
+  0% {
+    opacity: 1;
+    filter: blur(0px);
+  }
+  50% {
+    opacity: 0.3;
+    filter: blur(5px);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0px);
+  }
+}
+
+@keyframes fragmentExplode {
+  0% {
+    transform: translate(0, 0) scale(1) rotate(0deg);
+    opacity: 1;
+  }
+  50% {
+    transform: translate(var(--fragment-x, 0), var(--fragment-y, 0)) scale(0.8)
+      rotate(180deg);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translate(0, 0) scale(1) rotate(360deg);
+    opacity: 1;
+  }
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .hologram-projector-container {
+    width: 250px;
+    height: 300px;
+  }
+
+  .hologram-image {
+    width: 160px;
+    height: 120px;
+  }
+
+  .orbital-particles {
+    width: 200px;
+    height: 200px;
+  }
+}
+
+/* Seção do Showcase do Projeto */
+.project-showcase {
+  margin-bottom: 50px;
+  padding: 40px 20px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 170, 255, 0.05) 0%,
+    transparent 70%
+  );
+  border-radius: 20px;
+  border: 1px solid rgba(0, 170, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.project-showcase::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(
+    from 0deg,
+    transparent,
+    rgba(0, 170, 255, 0.03),
+    transparent,
+    rgba(0, 255, 170, 0.03),
+    transparent
+  );
+  animation: showcaseRotate 20s linear infinite;
+  pointer-events: none;
+}
+
+.project-showcase .hologram-projector-container {
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes showcaseRotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Ajustes para o container do case study */
+.case-study-container {
+  position: relative;
+  background: rgba(5, 5, 15, 0.98);
+  backdrop-filter: blur(15px);
+}
+
+/* Efeito de particulas no fundo do showcase */
+.project-showcase::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(
+      circle at 20% 30%,
+      rgba(0, 170, 255, 0.1) 1px,
+      transparent 1px
+    ),
+    radial-gradient(
+      circle at 80% 70%,
+      rgba(0, 255, 170, 0.1) 1px,
+      transparent 1px
+    ),
+    radial-gradient(
+      circle at 40% 80%,
+      rgba(170, 0, 255, 0.1) 1px,
+      transparent 1px
+    );
+  background-size: 50px 50px, 70px 70px, 90px 90px;
+  animation: particleFloat 15s infinite ease-in-out;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes particleFloat {
+  0%,
+  100% {
+    transform: translate(0, 0);
+    opacity: 0.3;
+  }
+  25% {
+    transform: translate(10px, -5px);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translate(-5px, 10px);
+    opacity: 0.4;
+  }
+  75% {
+    transform: translate(-10px, -10px);
+    opacity: 0.7;
+  }
+}
